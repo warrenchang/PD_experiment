@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results for Part II
+{% endblock %}
+
+{% block content %}
+
+            <div style="text-align:center;font-size:16px">
+            <p>
+                For your payment, Round {{ paying_round }} was randomly chosen. <br/>
+<br/>
+                In Round {{ paying_round }}, you chose {{ action }}, and the person you are matched with chose {{ other_action }}.<br/>
+                Your payoff from your choice is {{ payoff_from_action }} <br/>
+<br/>
+                Your guessed that the number of participants choosing 'X' is {{ guess }}. <br/>
+                The actual number is {{ otherX }}.<br/>
+                Your payment from the guess is {{ payoff_from_guess }}.<br/>
+<br/>
+                Your final payoff in this task amounts to <b>{{ payoff_PartII }}</b>.
+            </p>
+            </div>
+
+    <div style="text-align:right">
+    {% next_button %}
+    </div>
+
+
+{% endblock %}
+
+

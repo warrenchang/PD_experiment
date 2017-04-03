@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+   Payment Information
+{% endblock %}
+
+{% block content %}
+
+        <p style="text-align:center;font-size:18px">
+        <strong>
+            Your total payoff is {{ total_payoff }}
+        </strong>
+        </p>
+
+    <div style="text-align:center;font-size:16px">
+        <table class="table-condensed" style="margin:auto; width:500px; margin-top:20px;">
+            <tr><td>Quiz earnings:</td><td>{{ payoff_quiz }}</td></tr>
+            <tr><td>Part I earnings:</td><td>{{ real_payoff_PD }}</td></tr>
+            <tr><td style="font-size:14px">Part I earnings in points:</td><td style="font-size:14px">({{ payoff_PD }})</td></tr>
+            <tr><td>Part II earnings:</td><td>{{ real_payoff_coordination }}</td></tr>
+            <tr><td style="font-size:14px">Part II earnings in points:</td><td style="font-size:14px">({{ payoff_coordination }})</td></tr>
+            <tr><td>Part III earnings:</td><td>{{ payoff_ravens }}</td></tr>
+            <tr><td>Part IV earnings:</td><td>{{ payoff_investment }}</td></tr>
+            <tr><td colspan="2"><hr/></td></tr>
+        </table>
+    </div>
+
+    <div class="panel panel-default" style="margin-bottom:10px">
+        <div class="panel-body">
+            <p>This is the end of the experiment. Please fill out your receipt and remain seated until your number is called. Then take your receipt and proceed to the cashier.</p>
+        </div>
+    </div>
+
+{#    <div class="panel panel-default" style="margin-bottom:10px">#}
+{#        <div class="panel-body">#}
+{#            <p><strong>Classroom:</strong></p>#}
+{#            <p><em>If you want to keep track of how students did, the easiest thing is to assign the starting links to students by name.#}
+{#                It is even possible to give each student a single permanent link for a whole semester; so no need to waste time in each#}
+{#                lecture with handing out new links and keeping track of which student uses which link. Alternatively, you may just give#}
+{#                students anonymous links or secret nicknames.</em>#}
+{#            </p>#}
+{#        </div>#}
+{#    </div>#}
+
+
+{% endblock %}
+
+{% block form %}
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'otree/WaitPage.html' %}
+{% load staticfiles otree_tags %}
+{% block title %} {% endblock %}
+
+{% block content %}
+{#    {{ body_text }}#}
+        <table class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>Other participant</th>
+        </tr>
+        <tr>
+            <th style="text-align:center">A</th>
+            <th style="text-align:center">B</th>
+        </tr>
+        <tr>
+            <th rowspan=2><span class="rotate90">You</span></th>
+            <th align ="center">A</th>
+            <td>{{ Constants.R}}, {{ Constants.R}}</td>
+            <td>{{ Constants.S}}, {{ Constants.T}}</td>
+        </tr>
+        <tr>
+            <th align = "center">B</th>
+            <td>{{ Constants.T}}, {{ Constants.S}}</td>
+            <td>{{ Constants.P}}, {{ Constants.P}}</td>
+        </tr>
+    </table>
+
+    <p>
+       You have chosen {{ player.decision }}.
+    </p>
+
+    <p>Please wait the other participant.</p>
+
+    <hr>
+    <h5>
+       History
+    </h5>
+
+      <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>My choice</th>
+            <th>Other' choice</th>
+            <th>My earnings</th>
+            <th>Other's earnings</th>
+        </tr>
+        {% for p in player.in_previous_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                <td>{{ p.decision}}</td>
+                <td>{{ p.get_other_player.decision }}</td>
+                <td>{{ p.payoff }}</td>
+                <td>{{ p.get_other_player.payoff}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p></p>
+
+{% endblock %}

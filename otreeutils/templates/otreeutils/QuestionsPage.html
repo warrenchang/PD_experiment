@@ -1,0 +1,45 @@
+{% extends "otreeutils/ExtendedPage.html" %}
+{% load staticfiles otree_tags %}
+
+{% block app_styles %}
+<link href="{% static 'otreeutils/understanding.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block app_scripts %}
+<script src="{% static 'otreeutils/understanding.js' %}"></script>
+{% endblock %}
+
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block content %}
+
+    <p>You will be presented with problems that show a pattern with a bit cut out of it.
+        Look at the pattern, think what piece is needed to complete the pattern correctly
+        both along the rows and down the columns, BUT NOT THE DIAGONALS.
+        You have 10 minutes to complete the quiz. </p>
+    <br/>
+
+<ul class="questions">
+    {{ questions_form.as_ul }}
+</ul>
+
+<div style="display: none">
+    {% next_button %}
+</div>
+
+<div class="fake-next">
+    <input class="btn btn-primary btn-large btn-primary" type="button" value="Next"
+           onclick="checkUnderstandingQuestionsForm()">
+</div>
+
+<script>
+$(function() {
+    setupUnderstandingQuestionsForm({{ n_questions }}, "{{ hint_empty }}", "{{ form_field_n_wrong_attempts }}", {{ set_correct_answers }});
+});
+</script>
+{% endblock %}
+
+

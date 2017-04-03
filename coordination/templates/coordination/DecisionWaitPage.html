@@ -1,0 +1,72 @@
+{% extends 'otree/WaitPage.html' %}
+{% load staticfiles otree_tags %}
+{% block title %} {% endblock %}
+
+{% block content %}
+    {#    {{ body_text }}#}
+
+    <p style="font-size:16px">Round {{ player.round_number }} </p>
+
+    <div class="instructions well well-lg">
+
+        {#    <h3 class="panel-sub-heading">#}
+        {#        Instructions#}
+        {#    </h3>#}
+
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'global/matrix.css' %}"/>
+
+        <table class='table table-bordered text-center'
+               style='width: auto; margin: auto'>
+            <tr>
+                <th colspan=2 rowspan=2></th>
+                <th colspan=2>Other participant</th>
+            </tr>
+            <tr>
+                <th style="text-align:center">X</th>
+                <th style="text-align:center">Y</th>
+            </tr>
+            <tr>
+                <th rowspan=2><span class="rotate90">You</span></th>
+                <th align ="center">X</th>
+                <td>{{ p11}}, {{ p11 }}</td>
+                <td>{{ p12}}, {{ p21 }}</td>
+            </tr>
+            <tr>
+                <th align = "center">Y</th>
+                <td>{{ p21 }}, {{ p12 }}</td>
+                <td>{{ p22 }}, {{ p22 }}</td>
+            </tr>
+        </table>
+
+        <hr>
+
+        <p>
+            Please make your choice and estimate how many other participants (not including you) will choose X.
+        </p>
+        <p>
+            You will be paid based on your choice and the choice of the other person you are randomly matched with.
+
+            You will also be paid for the accuracy of your estimate.
+        </p>
+
+        <p>
+            There are two rounds in this Part, <strong>with different payoff structures</strong>. One round will be randomly picked for payment.
+        </p>
+    </div>
+
+  <div style="text-align:center">
+        <p style="font-size:16px">
+            You have chosen {{ player.action }}, and you have estimated {{ player.guess }} other participants will choose X.
+        </p>
+
+      {% if player.round_number < Constants.num_rounds %}
+        <p style="font-size:16px">Please wait for the other participants to reach decision before going to the next round.</p>
+          {% else %}
+          <p style="font-size:16px">Please wait for the other participants to reach decision. </p>
+  {% endif %}
+    </div>
+
+    <p></p>
+
+{% endblock %}

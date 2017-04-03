@@ -1,0 +1,90 @@
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+    {#    <h3 class="panel-sub-heading">#}
+    {#        Instructions#}
+    {#    </h3>#}
+    <div style="text-font:16px">
+        <p > In this task you can use part of your show-up fee, AED 20, to make an investment decision.
+        </p>
+        <br/>
+        <p>
+            <strong>
+                Option A:
+            </strong>
+        </p>
+
+        <p>
+            In Option A, you can invest the portion of this amount, and keep the rest of the money.
+        </p>
+
+        <div style="text-align:center">
+            <p>
+                If the investment succeeds, you receive 3 times the amount invested.
+                <br/>
+                If the investment fails, you lose the amount you invested.
+            </p>
+        </div>
+
+        <p>
+            There is an equal chance that the investment will fail or succeed.
+        </p>
+        <p>
+            For example, if you decide to invest 0, then you will keep all the AED 20 as your payoff.
+            If you decide to invest all your AED 20, then there is a 50% chance that you receive AED 60,
+            but also a 50% chance that you lose all the AED 20 and receive nothing.
+        </p>
+        <p>
+            If you choose to invest AED 8, then there is a 50% chance that the investment is successful
+            and you receive 12 + 3 x 8 =  AED 36,
+            but also a 50% chance that you lose all the AED 8 and only get AED 12.
+        </p>
+
+        <br/>
+        <p>
+            <strong>
+                Option B:
+            </strong>
+        </p>
+        <p>
+            If you choose Option B, you need to invest all the AED 20.
+        </p>
+        <div style="text-align:center">
+            <p>
+                If the investment succeeds, you receive AED 75.
+                <br/>
+                If the investment fails, you lose all the AED 20.
+            </p>
+        </div>
+
+        <p>
+            There is a 40% chance that the investment succeeds, and a 60% chance that the investment fails.
+        </p>
+        <br/>
+
+        <p>
+            <strong>
+                How do we determine whether the investment is a success?
+            </strong>
+        </p>
+
+        <p>
+            After you chose which option you want to invest and (for Option A) how much you wish to invest,
+            you can click the button "check the investment", and the computer will randomly generate a number
+            between 1 and 10 with equal probability.
+            <br/>
+            For Option A:
+            <br/>
+            If the random number is greater than 5, you earn 3 times the amount you chose to invest;
+            otherwise you lose the amount you chose to invest.
+            <br/>
+            For Option B:
+            <br/>
+            If the random number is greater than 6, you earn AED 75; otherwise you lose the investment.
+        </p>
+
+
+    </div>
+
+</div>

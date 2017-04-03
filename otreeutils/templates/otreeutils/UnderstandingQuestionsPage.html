@@ -1,0 +1,58 @@
+{% extends "otreeutils/ExtendedPage.html" %}
+{% load staticfiles otree_tags %}
+
+{% block app_styles %}
+<link href="{% static 'otreeutils/understanding.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block app_scripts %}
+<script src="{% static 'otreeutils/understanding.js' %}"></script>
+{% endblock %}
+
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block content %}
+<div class="instructions well well-lg">
+    <p>
+        Please answer the following questions that aim to test your understanding of the experiment.
+    </p>
+    <p>
+        <strong>
+            If you answer all questions correctly at the first time, you will receive a bonus of AED 10.<br/>
+            For each wrong attempt, AED 1 would be deducted from the bonus.
+        </strong>
+    </p>
+    <p>
+        For example, if you have 2 attempts that are wrong, you will receive AED 8.
+        If you have more than 10 wrong attempts, you will not receive any bonus.
+    </p>
+
+
+    <p>If you have already tried each question once and do not understand why your question is wrong,
+        you can ask the experimenter for help. </p>
+</div>
+
+<ul class="questions">
+    {{ questions_form.as_ul }}
+</ul>
+
+<div style="display: none">
+    {% next_button %}
+</div>
+
+<div class="fake-next">
+    <input class="btn btn-primary btn-large btn-primary" type="button" value="Next"
+           onclick="checkUnderstandingQuestionsForm()">
+</div>
+
+<script>
+$(function() {
+    setupUnderstandingQuestionsForm({{ n_questions }}, "{{ hint_empty }}", "{{ form_field_n_wrong_attempts }}", {{ set_correct_answers }});
+});
+</script>
+{% endblock %}
+
+

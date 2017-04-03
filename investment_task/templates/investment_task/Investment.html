@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Part IV Investment Task
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.instructions_template %}
+
+    {#    <div class="form-group required">#}
+    {% formfield player.amount_invested with label='Please make your investment decision:' %}
+
+
+    <p > Please carefully make your investment decision. After you have made your decision,
+        click "check the investment" and the computer will randomly
+        generate a number to determine whether your investment is successful.
+    </p>
+
+    <br/>
+    <div style="text-align:right">
+        <button class="btn btn-primary btn-large">Check the investment</button>
+    </div>
+
+{% endblock %}
