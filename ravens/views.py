@@ -22,7 +22,7 @@ class QuestionPage(Page):
     form_fields = ['answer']
 
     def vars_for_template(self):
-        return {'image_path': 'ravens/p{}.jpg'.format(self.round_number)}
+        return {'image_path': 'ravens/{}.jpg'.format(self.round_number)}
 
     def before_next_page(self):
         self.player.ans_correct = self.player.answer == Constants.answer_keys[self.round_number-1]
@@ -44,11 +44,11 @@ class Results(Page):
 
     def before_next_page(self):
         for p in self.subsession.get_players():
-            p.participant.vars['payoff_ravens'] = self.player.payoff.to_real_world_currency(self.session)
+            p.participant.vars['payoff_ravens'] = sum([p.ans_correct for p in self.player.in_all_rounds()])*2
 
 
 page_sequence = [
-    StartPage,
+    # StartPage,
     Introduction,
     QuestionPage,
     Results

@@ -127,6 +127,7 @@ mturk_hit_settings = {
     ]
 }
 
+EXCHANGE_RATE = 1/150 # change the exchange rate here
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
@@ -144,9 +145,19 @@ SESSION_CONFIGS = [
     {
         'name': 'PD_communication',
         'display_name': "Communication and Cooperation",
+        'num_demo_participants': 12,
+        'debug': DEBUG,
+        'app_sequence': ['my_PD_quiz','my_PD_practice','my_PD','coordination','my_PD_survey','ravens','investment_task','payment_info'],
+        'real_world_currency_per_point': EXCHANGE_RATE,
+        'participation_fee': 10,
+    },
+    {
+        'name': 'PD_test',
+        'display_name': "Repeated prisoner's dilemma_test",
         'num_demo_participants': 4,
-        'app_sequence': ['my_PD_quiz','my_PD_practice','my_PD','coordination','ravens','investment_task','my_PD_survey','payment_info'],
-        'real_world_currency_per_point': 1 / 200,
+        'app_sequence': ['my_PD_practice', 'my_PD', 'coordination', 'ravens',
+                         'investment_task' ],
+        'real_world_currency_per_point': EXCHANGE_RATE,
         'participation_fee': 10,
     },
     {
@@ -154,49 +165,51 @@ SESSION_CONFIGS = [
         'display_name': "Practice interaction for repeated prisoner's dilemma",
         'num_demo_participants': 1,
         'app_sequence': ['my_PD_practice'],
-        'real_world_currency_per_point': 1 / 200,
+        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'PD_multiple_interactions',
         'display_name': "Prisoner's Dilemma with multiple interactions",
-        'num_demo_participants': 4,
-        'app_sequence': ['my_PD', 'payment_info'],
-        'real_world_currency_per_point': 1 / 200,
+        'num_demo_participants': 12,
+        'debug': DEBUG,
+        'app_sequence': ['my_PD'],
+        'participation_fee': 10,
+        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'PD_quiz',
         'display_name': "Quiz questions for Prisoner's Dilemma",
         'num_demo_participants': 1,
         'app_sequence': ['my_PD_quiz', 'my_PD_survey'],
-        # 'real_world_currency_per_point': 1 / 200,
+        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'Raven',
         'display_name': "Raven's progressive matrix",
         'num_demo_participants': 1,
         'app_sequence': ['ravens'],
-        'real_world_currency_per_point': 1 / 200,
+        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'Investment',
         'display_name': "Investment Task for risk preferences",
         'num_demo_participants': 1,
         'app_sequence': ['investment_task'],
-        'real_world_currency_per_point': 1 / 200,
+        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'Coordination_game',
         'display_name': "Coordination: payoff dominant or risk dominant",
         'num_demo_participants': 4,
         'app_sequence': ['coordination'],
-        'real_world_currency_per_point': 1 / 200,
+        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'my_survey',
         'display_name': "Survey questions for Prisoner's Dilemma",
         'num_demo_participants': 1,
         'app_sequence': ['my_PD_survey'],
-        'real_world_currency_per_point': 1 / 200,
+        'real_world_currency_per_point': EXCHANGE_RATE,
     },
 ]
 

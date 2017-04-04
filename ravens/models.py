@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'ravens'
     players_per_group = None
     num_rounds = 10
-    answer_keys = [4,6,2,1,5,7,3,6,4,5]
+    answer_keys = [4,2,2,1,5,7,3,6,4,5]
     instructions_template = 'ravens/Instructions.html'
 
 

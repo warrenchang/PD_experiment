@@ -8,7 +8,7 @@ from otreeutils.surveys import create_player_model_for_survey
 author = 'Huanren Zhang'
 
 doc = """
-This is an infinitely repeated "Prisoner's Dilemma" with private monitoring.
+Survey questions
 """
 
 
@@ -76,9 +76,13 @@ SURVEY_DEFINITIONS = (
             }),
             ('reg_importance', {
                 'text': 'How important do you consider religion in your daily life?',
-                'field': models.CharField(choices=[ 'Very important', 'Somewhat important',
-                                                    'A little important', 'Not at all important'
-                                                    ]),
+                'field': models.PositiveIntegerField(
+                    choices=[
+                        [4, 'Very important'],
+                        [3, 'Somewhat important'],
+                        [2, 'A little important'],
+                        [1, 'Not at all important'],
+                    ]),
             }),
         ]
     },
@@ -104,26 +108,76 @@ SURVEY_DEFINITIONS = (
             }),
         ]
     },
+    # {
+    #     'page_title': 'Survey Questions - Page 4',
+    #     'survey_fields': [
+    #         ('importance_self',
+    #          {  # field name (which will also end up in your "Player" class and hence in your output data)
+    #              'text': 'When making your choice in Part I, how important it is to consider how this choice may affect your earnings in this interaction?',
+    #              # survey question
+    #              'field': models.PositiveIntegerField(
+    #                  choices=[
+    #                      [1, '1. Very unimportant'],
+    #                      [2, '2. Moderately unimportant'],
+    #                      [3, '3. Neutral'],
+    #                      [4, '4. Moderately important'],
+    #                      [5, '5. Very important']
+    #                  ]),
+    #          }),
+    #         ('importance_other',
+    #          {  # field name (which will also end up in your "Player" class and hence in your output data)
+    #              'text': "When making your choice in Part I, how important it is to consider how this choice may affect the other person's earnings in this interaction?",
+    #              # survey question
+    #              'field': models.PositiveIntegerField(
+    #                  choices=[
+    #                      [1, '1. Very unimportant'],
+    #                      [2, '2. Moderately unimportant'],
+    #                      [3, '3. Neutral'],
+    #                      [4, '4. Moderately important'],
+    #                      [5, '5. Very important']
+    #                  ]),
+    #          }),
+    #         ('importance_total',
+    #          {  # field name (which will also end up in your "Player" class and hence in your output data)
+    #              'text': 'When making your choice in Part I, how important it is to consider how this choice may lead to higher total earnings for you and the other person in this interaction?',
+    #              # survey question
+    #              'field': models.PositiveIntegerField(
+    #                  choices=[
+    #                      [1, '1. Very unimportant'],
+    #                      [2, '2. Moderately unimportant'],
+    #                      [3, '3. Neutral'],
+    #                      [4, '4. Moderately important'],
+    #                      [5, '5. Very important']
+    #                  ]),
+    #          }),
+    #     ]
+    # },
     {
         'page_title': 'Survey Questions - Page 4',
         'survey_fields': [
             ('satisfaction1',
              {  # field name (which will also end up in your "Player" class and hence in your output data)
                  'text': 'On a scale from 1 to 5, please indicate, overall, how dissatisfied/satisfied you are with the outcomes of Part I',
-             # survey question
-                 'field': models.CharField(
-                     choices=['1. Very dissatisfied', '2. Moderately dissatisfied', '3. Neutral',
-                              '4. Moderately satisfied', '5. Very satisfied'
-                              ]),
+                 # survey question
+                 'field': models.PositiveIntegerField(
+                     choices=[
+                         [1, '1. Very dissatisfied'],
+                         [2, '2. Moderately dissatisfied'],
+                         [3, '3. Neutral'],
+                         [4, '4. Moderately satisfied'],
+                         [5, '5. Very satisfied']
+                     ]),
              }),
             ('strategy1', {  # field name (which will also end up in your "Player" class and hence in your output data)
-                'text': 'Describe your strategy for Part I: how you made the choice, how you chose the message, and how you based your choice on the messages you sent or received.',  # survey question
+                'text': 'Describe your strategy for Part I: How did you make the choice? Did you base your choice on the signal you received? How did you choose the message to send? How did you base your choice on the messages you sent or received.',
+            # survey question
                 'field': models.TextField(),
             }),
-            ('strategy_again1', {  # field name (which will also end up in your "Player" class and hence in your output data)
-                'text': 'What would you do differently if you can do Part I again?',
-                'field': models.TextField(),
-            }),
+            ('strategy_again1',
+             {  # field name (which will also end up in your "Player" class and hence in your output data)
+                 'text': 'What would you do differently if you can do Part I again?',
+                 'field': models.TextField(),
+             }),
 
         ]
     },
@@ -133,11 +187,15 @@ SURVEY_DEFINITIONS = (
             ('satisfaction2',
              {  # field name (which will also end up in your "Player" class and hence in your output data)
                  'text': 'On a scale from 1 to 5, please indicate, overall, how dissatisfied/satisfied you are with the outcomes of Part II',
-             # survey question
-                 'field': models.CharField(
-                     choices=['1. Very dissatisfied', '2. Moderately dissatisfied', '3. Neutral',
-                              '4. Moderately satisfied', '5. Very satisfied'
-                              ]),
+                 # survey question
+                 'field': models.PositiveIntegerField(
+                     choices=[
+                         [1, '1. Very dissatisfied'],
+                         [2, '2. Moderately dissatisfied'],
+                         [3, '3. Neutral'],
+                         [4, '4. Moderately satisfied'],
+                         [5, '5. Very satisfied']
+                     ]),
              }),
             ('strategy2', {  # field name (which will also end up in your "Player" class and hence in your output data)
                 'text': 'Describe your strategy for Part II. How did you make your decision?',
@@ -156,14 +214,18 @@ SURVEY_DEFINITIONS = (
         'survey_fields': [
             ('difficulty',
              {  # field name (which will also end up in your "Player" class and hence in your output data)
-                 'text': 'Do you think the experiment is easy to understand and follow?',
-                 'field': models.CharField(
-                     choices=['1. Very easy', '2. Easy' , '3. Moderate',
-                              '4. Difficult', '5. Very difficult'
-                              ]),
+                 'text': 'Do you consider the first two parts of the experiment easy to understand and follow?',
+                 'field': models.PositiveIntegerField(
+                     choices=[
+                         [1, '1. Very easy'],
+                         [2, '2. Easy'],
+                         [3, '3. Moderate'],
+                         [4, '4. Difficult'],
+                         [5, '5. Very difficult']
+                     ]),
              }),
             ('experiment_like', {  # field name (which will also end up in your "Player" class and hence in your output data)
-                'text': 'How do you like the experiment? What you like/dislike about the experiment? Which part is hard to follow?',
+                'text': 'What you like/dislike about the experiment? Which part is hard to follow?',
                 'field': models.TextField(),
             }),
 

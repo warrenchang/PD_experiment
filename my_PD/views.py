@@ -7,6 +7,7 @@ import random
 
 class Introduction(Page):
     def is_displayed(self):
+        # return self.round_number == 1 and (not self.session.config['debug'])
         return self.round_number == 1
 
 
@@ -48,11 +49,11 @@ class SignalWaitPage(WaitPage):
 
 
 class Results(Page):
-    timeout_seconds = 10
+    timeout_seconds = 8
 
 
 class Continuation(Page):
-    timeout_seconds = 5
+    timeout_seconds = 8
 
     def is_displayed(self):
         return Constants.number_sequence[self.subsession.round_number-1] <= 6
@@ -64,7 +65,7 @@ class Continuation(Page):
 
 
 class InteractionResults(Page):
-    timeout_seconds = 45
+    timeout_seconds = 30
 
     def is_displayed(self):
         return Constants.number_sequence[self.subsession.round_number-1] > 6

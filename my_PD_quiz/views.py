@@ -16,7 +16,7 @@ class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
     set_correct_answers = APPS_DEBUG    # this is the default setting
     # set_correct_answers = False  # do not fill out the correct answers in advance (this is for fast skipping through pages)
     form_model = models.Player
-    form_field_n_wrong_attempts = 'understanding_questions_wrong_attempts'
+    form_field_n_wrong_attempts = 'wrong_attempts'
     questions = [
         {
             'question': 'You will be playing with the same participant in all interactions throughout Part I.',
@@ -73,15 +73,15 @@ class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
 
 
 class QuizResults(Page):
-    timeout_seconds = 30
+    timeout_seconds = 10
 
     def vars_for_template(self):
         return {
-            'quiz_payment': max(10-self.player.understanding_questions_wrong_attempts,0)
+            'quiz_payment': max(10-2*self.player.wrong_attempts,0)
         }
 
     def before_next_page(self):
-        self.player.payoff = max(10-self.player.understanding_questions_wrong_attempts,0) / self.session.config['real_world_currency_per_point']
+        self.player.payoff = max(10-2*self.player.wrong_attempts,0) / self.session.config['real_world_currency_per_point']
         # payoff are always in points, hence divided by self.session.vars['real_world_currency_per_point']
         self.player.participant.vars['payoff_quiz'] = self.player.payoff.to_real_world_currency(self.session)
 

@@ -11,15 +11,16 @@
 
     {% include Constants.instructions_template %}
 
-    <div style="text-align:center">
- <img src="{% static image_path %}"/>
-    </div>
+    {#    <div style="text-align:center">#}
+     <img src="{% static image_path %}" height="450" width="420"/>
+{#    <img src="{% static "ravens/example.jpg" %}"/>#}
+    {#    </div>#}
 
-{#    <div class="form-group required">#}
+    {#    <div class="form-group required">#}
     {% formfield player.answer with label='Please choose an item that best fits the pattern:' %}
-{#    </div>#}
+    {#    </div>#}
 
-{#   <div style="text-align:right">#}
+    {#   <div style="text-align:right">#}
     {% next_button %}
-{#    </div>#}
+    {#    </div>#}
 {% endblock %}

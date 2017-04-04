@@ -26,4 +26,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    understanding_questions_wrong_attempts = models.PositiveIntegerField()   # number of wrong attempts on understanding quesions page
+    wrong_attempts = models.PositiveIntegerField()   # number of wrong attempts on understanding questions page
