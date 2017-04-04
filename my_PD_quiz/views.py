@@ -30,7 +30,7 @@ class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
             'correct': '0.6',
         },
         {
-            'question': "Both you and the other person you are matched with chose A, and you received a random draw 'a'. The probability that the other person also received 'a' random draw a is",
+            'question': "Both you and the other person you are matched with chose A, and you received a signal 'a'. The probability that the other person also received 'a' signal a is",
             'options': [0.95, 0.6, 0.55, 0.4],
             'correct': '0.95',
         },
@@ -40,27 +40,27 @@ class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
             'correct': 'False',
         },
         {
-            'question': "The random draw you receive depends on the choice of the other person you are matched with.",
+            'question': "The signal you receive depends on the choice of the other person you are matched with.",
             'options': ['True', 'False'],
             'correct': 'True',
         },
         {
-            'question': "If you choose A, the probability for the other person to receive a random draw 'a' is always higher than receiving a random draw 'b'.",
+            'question': "If you choose A, the probability for the other person to receive a signal 'a' is always higher than receiving a signal 'b'.",
             'options': ['True', 'False'],
             'correct': 'True',
         },
         {
-            'question': "When you and the other person make the same choice, the probability for you two to receive the same random draw is",
+            'question': "When you and the other person make the same choice, the probability for you two to receive the same signal is",
             'options': [0.95, 0.6, 0.55, 0.4],
             'correct': '0.95',
         },
         {
-            'question': "You and the other person can send messages about the random draws you received to help each other make decisions.",
+            'question': "You and the other person can send messages about the signals you received to help each other make decisions.",
             'options': ['True', 'False'],
             'correct': 'True',
         },
         {
-            'question': "When you and the other person have different choices, the random draw you receive is independent from the random draw the other person receives.",
+            'question': "When you and the other person have different choices, the signal you receive is independent from the signal the other person receives.",
             'options': ['True', 'False'],
             'correct': 'True',
         },

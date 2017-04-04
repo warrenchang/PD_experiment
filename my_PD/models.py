@@ -4,10 +4,10 @@ from otree.api import (
 )
 import random
 
+author = 'Huanren Zhang'
+
 doc = """
-This is a one-shot "Prisoner's Dilemma". Two players are asked separately
-whether they want to cooperate or defect. Their choices directly determine the
-payoffs.
+This is an infinitely repeated "Prisoner's Dilemma" with private monitoring.
 """
 
 
@@ -73,10 +73,12 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def before_session_starts(self):
         # this is run before the start of every round
-        if self.round_number == 1:
+        current_round_in_interaction = Constants.round_in_interactions[self.round_number-1]
+
+        if current_round_in_interaction == 1: # at the start of each interaction, reshuffle group
             self.group_randomly()
-        else:
-            self.group_like_round(1)
+        else:  # otherwise, group structure is the same as in the previous round
+            self.group_like_round(self.round_number-1)
 
         for p in self.get_players(): # set interaction number and round number
             p.interaction_number = Constants.interactions[p.round_number-1]

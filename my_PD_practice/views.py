@@ -4,12 +4,6 @@ from otree.api import Currency as c, currency_range
 from .models import Constants
 import random
 
-class Introduction(Page):
-    timeout_seconds = 10
-
-    def is_displayed(self):
-        return self.round_number == 1
-
 
 class Decision(Page):
     # timeout_seconds = 30
@@ -19,15 +13,7 @@ class Decision(Page):
     def before_next_page(self):
         if self.timeout_happened:
             self.player.action = random.choice(['A','B'])
-
-
-class DecisionWaitPage(WaitPage):
-    template_name = 'my_PD/DecisionWaitPage.html'
-
-    def after_all_players_arrive(self):
-        # it only gets executed once
-        self.group.interact()
-        print('players have interacted!')
+        self.player.interact()
 
 
 class Signal(Page):
@@ -37,15 +23,8 @@ class Signal(Page):
 
     def before_next_page(self):
         if self.timeout_happened:
-            self.player.message = random.choice(['a','b'])
-
-
-class SignalWaitPage(WaitPage):
-    template_name = 'my_PD/SignalWaitPage.html'
-
-    def after_all_players_arrive(self):
-        self.group.send_message()
-        print('message is sent!')
+            self.player.message = random.choice(['a', 'b'])
+        self.player.send_message()
 
 
 class Results(Page):
@@ -78,26 +57,21 @@ class InteractionResults(Page):
 
 class RematchingWaitPage(WaitPage):
     # template_name = 'my_PD/SignalWaitPage.html'
-    template_name = 'my_PD/RematchingWaitPage.html'
+    template_name = 'my_PD_practice/RematchingWaitPage.html'
     wait_for_all_groups = True
 
     def is_displayed(self):
          return Constants.number_sequence[self.subsession.round_number-1] > 6  # and self.round_number != Constants.num_rounds
 
     def after_all_players_arrive(self):
-        self.subsession.group_randomly()  # randomly rematching
-        print('Group randomly rematched')
         if self.round_number == Constants.num_rounds:
             for p in self.subsession.get_players():
                 p.participant.vars['payoff_PD'] = sum([this_player.payoff for this_player in p.in_all_rounds()])
-                print((p,sum([this_player.payoff for this_player in p.in_all_rounds()])),p.participant.vars['payoff_PD'])
+
 
 page_sequence = [
-    Introduction,
     Decision,
-    DecisionWaitPage,
     Signal,
-    SignalWaitPage,
     Results,
     Continuation,
     InteractionResults,

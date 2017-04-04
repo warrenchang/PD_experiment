@@ -8,7 +8,7 @@ from otreeutils.surveys import create_player_model_for_survey
 author = 'Huanren Zhang'
 
 doc = """
-Your app description
+This is an infinitely repeated "Prisoner's Dilemma" with private monitoring.
 """
 
 

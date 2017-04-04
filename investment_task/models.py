@@ -4,10 +4,10 @@ from otree.api import (
 )
 
 
-author = 'Your name here'
+author = 'Huanren Zhang'
 
 doc = """
-Your app description
+Investment task that measures risk preferences. Similar to Gneezy and Potter (1997) and Eckel and Grossman (2002,2008)
 """
 
 

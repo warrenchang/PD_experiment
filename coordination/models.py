@@ -4,10 +4,10 @@ from otree.api import (
 )
 import random
 
+author = 'Huanren Zhang'
+
 doc = """
-This is a one-shot "Prisoner's Dilemma". Two players are asked separately
-whether they want to cooperate or defect. Their choices directly determine the
-payoffs.
+Stag-hunt game to measure the tolerance of strategic uncertainty
 """
 
 

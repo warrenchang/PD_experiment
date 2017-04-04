@@ -145,7 +145,15 @@ SESSION_CONFIGS = [
         'name': 'PD_communication',
         'display_name': "Communication and Cooperation",
         'num_demo_participants': 4,
-        'app_sequence': ['my_PD_quiz','my_PD','coordination','ravens','investment_task','my_PD_survey','payment_info'],
+        'app_sequence': ['my_PD_quiz','my_PD_practice','my_PD','coordination','ravens','investment_task','my_PD_survey','payment_info'],
+        'real_world_currency_per_point': 1 / 200,
+        'participation_fee': 10,
+    },
+    {
+        'name': 'PD_practice',
+        'display_name': "Practice interaction for repeated prisoner's dilemma",
+        'num_demo_participants': 1,
+        'app_sequence': ['my_PD_practice'],
         'real_world_currency_per_point': 1 / 200,
     },
     {

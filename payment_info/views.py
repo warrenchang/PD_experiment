@@ -18,6 +18,7 @@ class PaymentInfo(Page):
             'real_payoff_coordination': participant.vars['payoff_coordination'].to_real_world_currency(self.session),
             'payoff_ravens': participant.vars['payoff_ravens'],
             'payoff_investment': participant.vars['payoff_investment'],
+            'participation_fee': self.session.config['participation_fee']
         }
 
 

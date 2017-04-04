@@ -5,10 +5,13 @@ from otree.api import (
 import random
 
 
+
+author = 'Huanren Zhang'
+
 doc = """
-This application provides a webpage instructing participants how to get paid.
-Examples are given for the lab and Amazon Mechanical Turk (AMT).
+Payment information for the session
 """
+
 
 
 class Constants(BaseConstants):

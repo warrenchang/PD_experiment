@@ -4,10 +4,10 @@ from otree.api import (
 )
 
 
-author = 'Your name here'
+author = 'Huanren Zhang'
 
 doc = """
-Your app description
+Quiz questions that test the understanding of PD with private monitoring and communication
 """
 
 

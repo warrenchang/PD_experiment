@@ -4,10 +4,10 @@ from otree.api import (
 )
 
 
-author = 'Your name here'
+author = 'Huanren Zhang'
 
 doc = """
-Your app description
+Raven's progressive matrices test measuring cognitive ability
 """
 
 
@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'ravens'
     players_per_group = None
     num_rounds = 10
-    answer_keys = [2,3,5,3,2,3,3,4,5,2]
+    answer_keys = [4,6,2,1,5,7,3,6,4,5]
     instructions_template = 'ravens/Instructions.html'
 
 
