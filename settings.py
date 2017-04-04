@@ -97,13 +97,9 @@ DEMO_PAGE_INTRO_TEXT = """
 
 ROOMS = [
     {
-        'name': 'econ101',
-        'display_name': 'Econ 101 class',
-        'participant_label_file': '_rooms/econ101.txt',
-    },
-    {
-        'name': 'live_demo',
-        'display_name': 'Room for live demo (no participant labels)',
+        'name': 'ssel_b_side',
+        'display_name': 'SSEL Desktops B01 - B24 - The B-Sides',
+        'participant_label_file': '_rooms/ssel_b_side.txt',
     },
 ]
 
