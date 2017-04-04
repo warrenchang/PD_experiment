@@ -4,6 +4,12 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 
+
+class StartPage(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class Decision(Page):
     form_model = models.Player
     form_fields = ['action','guess']
@@ -74,6 +80,7 @@ class MyWaitPage(WaitPage):
 
 
 page_sequence = [
+    StartPage,
     Decision,
     DecisionWaitPage,
     Results,

@@ -96,6 +96,7 @@ class Player(BasePlayer):
     other_message = models.CharField(choices=['a','b'])
 
     cum_payoff = models.CurrencyField()
+    payoff0 = models.CurrencyField() # define payoff0, record payoff but do not count for final payment
 
     def get_partner(self):
         return self.get_others_in_group()[0]
@@ -106,10 +107,10 @@ class Player(BasePlayer):
             self.other_action = 'A'
         else:
             self.other_action = random.choice(['A','B'])
-        self.payoff = (Constants.payoff_matrix[self.action][self.other_action])
+        self.payoff0 = (Constants.payoff_matrix[self.action][self.other_action])
         self.other_payoff = (Constants.payoff_matrix[self.other_action][self.action])
 
-        self.cum_payoff = sum([p.payoff for p in self.in_all_rounds()])
+        self.cum_payoff = sum([p.payoff0 for p in self.in_all_rounds()])
 
         # then generate signals
         if self.other_action == 'A':  # generate the signal for self

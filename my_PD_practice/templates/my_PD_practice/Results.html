@@ -2,12 +2,12 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Results
+    Practice interaction: results
 {% endblock %}
 
 
 {% block content %}
-    <p style="font-size:16px">Round {{ player.round_in_interaction }} of Interaction {{ player.interaction_number }} </p>
+    <p style="font-size:16px">Round {{ player.round_in_interaction }} of Practice Interaction</p>
 
     {% include Constants.instructions_template %}
 
@@ -45,7 +45,7 @@
             {% for p in player.in_previous_rounds %}
                 {% if p.interaction_number == player.interaction_number %}
                     <tr>
-                        <td>{{ p.interaction_number }}</td>
+                        <th style="text-align:center">'Practice'</th>
                         <td>{{ p.round_in_interaction }}</td>
                         <td>{{ p.action}}</td>
                         <td>{{ p.signal }}</td>
@@ -57,7 +57,7 @@
         </table>
     {% endif %}
 
-    {% if player.interaction_number != 1 %}
+    {% if player.interaction_number > 1 %}
         <h5 style="text-align:center">
             History for previous interactions
         </h5>
@@ -85,7 +85,7 @@
                         <td>{{ p.other_message}}</td>
                         <td>{{ p.other_action}}</td>
                         <td>{{ p.other_signal}}</td>
-                        <td>{{ p.payoff}}</td>
+                        <td>{{ p.payoff0}}</td>
                         <td>{{ p.cum_payoff}}</td>
                     </tr>
                 {% endif %}

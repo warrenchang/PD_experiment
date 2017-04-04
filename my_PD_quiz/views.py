@@ -6,6 +6,11 @@ from .models import Constants
 from otreeutils.pages import AllGroupsWaitPage, ExtendedPage, UnderstandingQuestionsPage, APPS_DEBUG
 
 
+class StartPage(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
     page_title = 'Quiz questions of Part I'
     set_correct_answers = APPS_DEBUG    # this is the default setting
@@ -82,6 +87,7 @@ class QuizResults(Page):
 
 
 page_sequence = [
+    StartPage,
     SomeUnderstandingQuestions,
     QuizResults,
     AllGroupsWaitPage,

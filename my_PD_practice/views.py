@@ -4,6 +4,10 @@ from otree.api import Currency as c, currency_range
 from .models import Constants
 import random
 
+class StartPage(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
 
 class Decision(Page):
     # timeout_seconds = 30
@@ -70,6 +74,7 @@ class RematchingWaitPage(WaitPage):
 
 
 page_sequence = [
+    StartPage,
     Decision,
     Signal,
     Results,

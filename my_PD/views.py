@@ -4,9 +4,8 @@ from otree.api import Currency as c, currency_range
 from .models import Constants
 import random
 
-class Introduction(Page):
-    timeout_seconds = 10
 
+class Introduction(Page):
     def is_displayed(self):
         return self.round_number == 1
 

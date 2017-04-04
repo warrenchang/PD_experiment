@@ -4,6 +4,11 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
+class StartPage(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class Introduction(Page):
     timeout_seconds = 60
 
@@ -43,6 +48,7 @@ class Results(Page):
 
 
 page_sequence = [
+    StartPage,
     Introduction,
     QuestionPage,
     Results
