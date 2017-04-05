@@ -7,7 +7,9 @@ from .models import Constants
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield (views.StartPage)
-        yield (views.Introduction)
+        # yield (views.StartPage)
+        if self.subsession.round_number == 1:
+            yield (views.Introduction)
         yield (views.QuestionPage, {'answer': Constants.answer_keys[self.subsession.round_number-1]})
-        yield (views.Results)
+        if self.subsession.round_number == Constants.num_rounds:
+            yield (views.Results)

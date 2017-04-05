@@ -7,9 +7,12 @@ import random
 
 class PlayerBot(Bot):
     def play_round(self):
-        yield (views.StartPage)
+        # yield (views.StartPage)
         yield (views.Decision, {"action": random.choice(['A','B'])})
-        yield (views.Signal, {"message": random.choice(['a','b'])})
+        if self.session.config['treatment'] == 'COM':
+            yield (views.Signal, {"message": random.choice(['a','b'])})
         yield (views.Results)
-        yield (views.Continuation)
-        yield (views.InteractionResults)
+        if Constants.number_sequence[self.subsession.round_number - 1] <= 6:
+            yield (views.Continuation)
+        if Constants.number_sequence[self.subsession.round_number-1] > 6:
+            yield (views.InteractionResults)

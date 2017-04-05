@@ -8,7 +8,7 @@ import random
 class StartPage(Page):
     def is_displayed(self):
         print(('coordination:at_StartPage',self.participant.vars))
-        return self.round_number == 1
+        return self.round_number == 1 and (not self.session.config['debug'])
 
     def before_next_page(self):
         print(('coordination:leaving_StartPage',self.participant.vars))

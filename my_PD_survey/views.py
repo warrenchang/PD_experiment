@@ -31,9 +31,13 @@ class SurveyPage2(SurveyPage):
 class SurveyPage3(SurveyPage):
     pass
 
-class SurveyPage4(SurveyPage):
-    pass
+class SurveyPage4_COM(SurveyPage):
+    def is_displayed(self):
+        return self.session.config['treatment'] == 'COM'
 
+class SurveyPage4_PBL(SurveyPage):
+    def is_displayed(self):
+        return self.session.config['treatment'] == 'PBL'
 
 class SurveyPage5(SurveyPage):
     pass
@@ -50,7 +54,8 @@ survey_pages = [
     SurveyPage1,
     SurveyPage2,
     SurveyPage3,
-    SurveyPage4,
+    SurveyPage4_COM,
+    SurveyPage4_PBL,
     SurveyPage5,
     SurveyPage6,
 ]

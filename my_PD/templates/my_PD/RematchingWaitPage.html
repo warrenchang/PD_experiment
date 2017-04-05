@@ -10,7 +10,7 @@
             {% if player.round_number != Constants.num_rounds %}
                 <strong>Please wait for other participants to finish, then you will be randomly rematched to another participant...
                 </strong>
-                {% else %}
+            {% else %}
                 <strong>This is the end of Part I. Please wait for other participants to finish, then Part II will start.
                 </strong>
             {% endif %}
@@ -27,8 +27,10 @@
             <th style="text-align:center">Round</th>
             <th style="text-align:center">Your choice</th>
             <th style="text-align:center">Your signal</th>
-            <th style="text-align:center">Message you sent</th>
-            <th style="text-align:center">Message other sent</th>
+            {% if treatment == 'COM' %}
+                <th style="text-align:center">Message you sent</th>
+                <th style="text-align:center">Message other sent</th>
+            {% endif %}
             <th style="text-align:center">Other's choice</th>
             <th style="text-align:center">Other's signal</th>
             <th style="text-align:center">Your earnings</th>
@@ -41,8 +43,10 @@
                     <td>{{ p.round_in_interaction}}</td>
                     <td>{{ p.action}}</td>
                     <td>{{ p.signal }}</td>
-                    <td>{{ p.message}}</td>
-                    <td>{{ p.other_message}}</td>
+                    {% if treatment == 'COM' %}
+                        <td>{{ p.message}}</td>
+                        <td>{{ p.other_message}}</td>
+                    {% endif %}
                     <td>{{ p.other_action}}</td>
                     <td>{{ p.other_signal}}</td>
                     <td>{{ p.payoff}}</td>
@@ -63,8 +67,10 @@
                 <th style="text-align:center">Round</th>
                 <th style="text-align:center">Your choice</th>
                 <th style="text-align:center">Your signal</th>
-                <th style="text-align:center">Message you sent</th>
-                <th style="text-align:center">Message other sent</th>
+                {% if treatment == 'COM' %}
+                    <th style="text-align:center">Message you sent</th>
+                    <th style="text-align:center">Message other sent</th>
+                {% endif %}
                 <th style="text-align:center">Other's choice</th>
                 <th style="text-align:center">Other's signal</th>
                 <th style="text-align:center">Your earnings</th>
@@ -77,8 +83,10 @@
                         <td>{{ p.round_in_interaction}}</td>
                         <td>{{ p.action}}</td>
                         <td>{{ p.signal }}</td>
-                        <td>{{ p.message}}</td>
-                        <td>{{ p.other_message}}</td>
+                        {% if treatment == 'COM' %}
+                            <td>{{ p.message}}</td>
+                            <td>{{ p.other_message}}</td>
+                        {% endif %}
                         <td>{{ p.other_action}}</td>
                         <td>{{ p.other_signal}}</td>
                         <td>{{ p.payoff}}</td>

@@ -10,7 +10,7 @@ class StartPage(Page):
     def is_displayed(self):
         if self.round_number == 1:
             print('This is the start of PD quiz')
-        return self.round_number == 1
+        return self.round_number == 1 and (not self.session.config['debug'])
 
 
 class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
@@ -19,59 +19,171 @@ class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
     # set_correct_answers = False  # do not fill out the correct answers in advance (this is for fast skipping through pages)
     form_model = models.Player
     form_field_n_wrong_attempts = 'wrong_attempts'
-    questions = [
-        {
-            'question': 'You will be playing with the same participant in all interactions throughout Part I.',
-            'options': ['True', 'False'],
-            'correct': 'False',
-        },
-        {
-            'question': 'Suppose in a round you choose B, and the other person choose A, your payoff for that round is',
-            'options': [150, 130, 30, 5],
-            'correct': 150,
-            # 'hint': 'You can have a look at Wikipedia!'
-        },
-        {
-            'question': 'Suppose you are in round 6 in an interaction with another participant. The probability that there is a round 7 is',
-            'options': [0.95, 0.6, 0.55, 0.4],
-            'correct': '0.6',
-        },
-        {
-            'question': "Both you and the other person you are matched with chose A, and you received a signal 'a'. The probability that the other person also received 'a' signal a is",
-            'options': [0.95, 0.6, 0.55, 0.4],
-            'correct': '0.95',
-        },
-        {
-            'question': 'You only know your payoff, but not the choice of the other person at the end of a round.',
-            'options': ['True', 'False'],
-            'correct': 'False',
-        },
-        {
-            'question': "The signal you receive depends on the choice of the other person you are matched with.",
-            'options': ['True', 'False'],
-            'correct': 'True',
-        },
-        {
-            'question': "If you choose A, the probability for the other person to receive a signal 'a' is higher than receiving a signal 'b'.",
-            'options': ['True', 'False'],
-            'correct': 'True',
-        },
-        {
-            'question': "When you and the other person both choose A, the probability for you two to receive the same signal is",
-            'options': [0.95, 0.6, 0.55, 0.4],
-            'correct': '0.95',
-        },
-        {
-            'question': "You and the other person can send messages about the signals you received to help each other make decisions.",
-            'options': ['True', 'False'],
-            'correct': 'True',
-        },
-        {
-            'question': "When you and the other person make different choices, the signal you receive is independent from the signal the other person receives.",
-            'options': ['True', 'False'],
-            'correct': 'True',
-        },
-    ]
+
+    def get_questions(self):
+        if self.session.config['treatment'] == 'COM':
+            questions = [
+                {
+                    'question': 'You will be playing with the same participant in all interactions throughout Part I.',
+                    'options': ['True', 'False'],
+                    'correct': 'False',
+                },
+                {
+                    'question': 'Suppose in a round you choose B, and the other person choose A, your payoff for that round is',
+                    'options': [150, 130, 30, 5],
+                    'correct': 150,
+                    # 'hint': 'You can have a look at Wikipedia!'
+                },
+                {
+                    'question': 'Suppose you are in round 6 in an interaction with another participant. The probability that there is a round 7 is',
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.6',
+                },
+                {
+                    'question': "Both you and the other person you are matched with chose A, and you received a signal 'a'. The probability that the other person also received 'a' signal a is",
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.95',
+                },
+                {
+                    'question': 'You only know your payoff, but not the choice of the other person at the end of a round.',
+                    'options': ['True', 'False'],
+                    'correct': 'False',
+                },
+                {
+                    'question': "The signal you receive depends on the choice of the other person you are matched with.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "If you choose A, the probability for the other person to receive a signal 'a' is higher than receiving a signal 'b'.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "When you and the other person both choose A, the probability for you two to receive the same signal is",
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.95',
+                },
+                {
+                    'question': "You and the other person can send messages about the signals you received to help each other make decisions.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "When you and the other person make different choices, the signal you receive is independent from the signal the other person receives.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+            ]
+        elif self.session.config['treatment'] == 'PBL':
+            questions = [
+                {
+                    'question': 'You will be playing with the same participant in all interactions throughout Part I.',
+                    'options': ['True', 'False'],
+                    'correct': 'False',
+                },
+                {
+                    'question': 'Suppose in a round you choose B, and the other person choose A, your payoff for that round is',
+                    'options': [150, 130, 30, 5],
+                    'correct': 150,
+                    # 'hint': 'You can have a look at Wikipedia!'
+                },
+                {
+                    'question': 'Suppose you are in round 6 in an interaction with another participant. The probability that there is a round 7 is',
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.6',
+                },
+                {
+                    'question': "Both you and the other person you are matched with chose A, and you received a signal 'a'. The probability that the other person also received 'a' signal a is",
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.95',
+                },
+                {
+                    'question': 'You only know your payoff, but not the choice of the other person at the end of a round.',
+                    'options': ['True', 'False'],
+                    'correct': 'False',
+                },
+                {
+                    'question': "The signal you receive depends on the choice of the other person you are matched with.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "If you choose A, the probability for the other person to receive a signal 'a' is higher than receiving a signal 'b'.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "When you and the other person both choose A, the probability for you two to receive the same signal is",
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.95',
+                },
+                {
+                    'question': "You will know the signal the other person received, so you can compare your signal with the other's to make your choice",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "When you and the other person make different choices, the signal you receive is independent from the signal the other person receives.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+            ]
+        else:
+            questions = [
+                {
+                    'question': 'You will be playing with the same participant in all interactions throughout Part I.',
+                    'options': ['True', 'False'],
+                    'correct': 'False',
+                },
+                {
+                    'question': 'Suppose in a round you choose B, and the other person choose A, your payoff for that round is',
+                    'options': [150, 130, 30, 5],
+                    'correct': 150,
+                    # 'hint': 'You can have a look at Wikipedia!'
+                },
+                {
+                    'question': 'Suppose you are in round 6 in an interaction with another participant. The probability that there is a round 7 is',
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.6',
+                },
+                {
+                    'question': "Both you and the other person you are matched with chose A, and you received a signal 'a'. The probability that the other person also received 'a' signal a is",
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.95',
+                },
+                {
+                    'question': 'You only know your payoff, but not the choice of the other person at the end of a round.',
+                    'options': ['True', 'False'],
+                    'correct': 'False',
+                },
+                {
+                    'question': "The signal you receive depends on the choice of the other person you are matched with.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "If you choose A, the probability for the other person to receive a signal 'a' is higher than receiving a signal 'b'.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "When you and the other person both choose A, the probability for you two to receive the same signal is",
+                    'options': [0.95, 0.6, 0.55, 0.4],
+                    'correct': '0.95',
+                },
+                {
+                    'question': "You will know the signal the other person received at the end of each round, so you can compare your signal with the other's to make your choice",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+                {
+                    'question': "When you and the other person make different choices, the signal you receive is independent from the signal the other person receives.",
+                    'options': ['True', 'False'],
+                    'correct': 'True',
+                },
+            ]
+        return questions
 
 
 class QuizResults(Page):

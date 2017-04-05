@@ -182,6 +182,35 @@ SURVEY_DEFINITIONS = (
         ]
     },
     {
+        'page_title': 'Survey Questions - Page 4',
+        'survey_fields': [
+            ('satisfaction1',
+             {  # field name (which will also end up in your "Player" class and hence in your output data)
+                 'text': 'On a scale from 1 to 5, please indicate, overall, how dissatisfied/satisfied you are with the outcomes of Part I',
+                 # survey question
+                 'field': models.PositiveIntegerField(
+                     choices=[
+                         [1, '1. Very dissatisfied'],
+                         [2, '2. Moderately dissatisfied'],
+                         [3, '3. Neutral'],
+                         [4, '4. Moderately satisfied'],
+                         [5, '5. Very satisfied']
+                     ]),
+             }),
+            ('strategy1', {  # field name (which will also end up in your "Player" class and hence in your output data)
+                'text': 'Describe your strategy for Part I: How did you make the choice? Did you base your choice on the signal you received or the other person receive?',
+                # survey question
+                'field': models.TextField(),
+            }),
+            ('strategy_again1',
+             {  # field name (which will also end up in your "Player" class and hence in your output data)
+                 'text': 'What would you do differently if you can do Part I again?',
+                 'field': models.TextField(),
+             }),
+
+        ]
+    },
+    {
         'page_title': 'Survey Questions - Page 5',
         'survey_fields': [
             ('satisfaction2',

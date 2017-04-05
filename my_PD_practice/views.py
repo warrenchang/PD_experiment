@@ -4,14 +4,33 @@ from otree.api import Currency as c, currency_range
 from .models import Constants
 import random
 
-class StartPage(Page):
+class BasePage(Page):
+    def vars_for_template(self):
+        v =  {
+            'treatment': self.session.config['treatment'],
+        }
+        v.update(self.extra_vars_for_template())
+        return v
+
+    def extra_vars_for_template(self):
+        return {}
+
+
+class BaseWaitPage(WaitPage):
+    def vars_for_template(self):
+        return {
+            'treatment': self.session.config['treatment'],
+        }
+
+
+class StartPage(BasePage):
     def is_displayed(self):
         if self.round_number == 1:
             print('This is the start of PD practice')
-        return self.round_number == 1
+        return self.round_number == 1 and (not self.session.config['debug'])
 
 
-class Decision(Page):
+class Decision(BasePage):
     # timeout_seconds = 30
     form_model = models.Player
     form_fields = ['action']
@@ -22,10 +41,13 @@ class Decision(Page):
         self.player.interact()
 
 
-class Signal(Page):
+class Signal(BasePage):
     # timeout_seconds = 30
     form_model = models.Player
     form_fields = ['message']
+
+    def is_displayed(self):
+        return self.session.config['treatment'] == "COM"
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -33,35 +55,35 @@ class Signal(Page):
         self.player.send_message()
 
 
-class Results(Page):
+class Results(BasePage):
     timeout_seconds = 10
 
 
-class Continuation(Page):
+class Continuation(BasePage):
     timeout_seconds = 5
 
     def is_displayed(self):
         return Constants.number_sequence[self.subsession.round_number-1] <= 6
 
-    def vars_for_template(self):
+    def extra_vars_for_template(self):
         return {
             'number_generated': Constants.number_sequence[self.player.round_number-1],
         }
 
 
-class InteractionResults(Page):
+class InteractionResults(BasePage):
     timeout_seconds = 45
 
     def is_displayed(self):
         return Constants.number_sequence[self.subsession.round_number-1] > 6
 
-    def vars_for_template(self):
+    def extra_vars_for_template(self):
         return {
             'number_generated': Constants.number_sequence[self.player.round_number-1],
         }
 
 
-class RematchingWaitPage(WaitPage):
+class RematchingWaitPage(BaseWaitPage):
     # template_name = 'my_PD/SignalWaitPage.html'
     template_name = 'my_PD_practice/RematchingWaitPage.html'
     wait_for_all_groups = True

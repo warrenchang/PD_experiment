@@ -22,7 +22,7 @@
 
     <hr>
 
-    {% if player.round_in_interaction != 1 %}
+   {% if player.round_in_interaction != 1 %}
         <p style="text-align:center;font-size:16px">
             History for the current interaction
         </p>
@@ -32,25 +32,35 @@
                 <th style="text-align:center">Round</th>
                 <th style="text-align:center">Your choice</th>
                 <th style="text-align:center">Your signal</th>
-                <th style="text-align:center">Message you sent</th>
-                <th style="text-align:center">Message other sent</th>
+                {% if treatment == 'COM' %}
+                    <th style="text-align:center">Message you sent</th>
+                    <th style="text-align:center">Message other sent</th>
+                {% endif %}
+                {% if treatment == 'PBL' %}
+                    <th style="text-align:center">Other's signal</th>
+                {% endif %}
             </tr>
             {% for p in player.in_previous_rounds %}
                 {% if p.interaction_number == player.interaction_number %}
                     <tr>
-                        <td>{{ p.interaction_number }}</td>
+                        <td>{{ p.interaction_number}}</td>
                         <td>{{ p.round_in_interaction }}</td>
                         <td>{{ p.action}}</td>
                         <td>{{ p.signal }}</td>
-                        <td>{{ p.message}}</td>
-                        <td>{{ p.other_message}}</td>
+                        {% if treatment == 'COM' %}
+                            <td>{{ p.message}}</td>
+                            <td>{{ p.other_message}}</td>
+                        {% endif %}
+                        {% if treatment == 'PBL' %}
+                            <td>{{ p.other_signal }}</td>
+                        {% endif %}
                     </tr>
                 {% endif %}
             {% endfor %}
         </table>
     {% endif %}
 
-    {% if player.interaction_number != 1 %}
+    {% if player.interaction_number > 1 %}
         <h5 style="text-align:center">
             History for previous interactions
         </h5>
@@ -60,8 +70,11 @@
                 <th style="text-align:center">Round</th>
                 <th style="text-align:center">Your choice</th>
                 <th style="text-align:center">Your signal</th>
-                <th style="text-align:center">Message you sent</th>
-                <th style="text-align:center">Message other sent</th>
+
+                {% if treatment == 'COM' %}
+                    <th style="text-align:center">Message you sent</th>
+                    <th style="text-align:center">Message other sent</th>
+                {% endif %}
                 <th style="text-align:center">Other's choice</th>
                 <th style="text-align:center">Other's signal</th>
                 <th style="text-align:center">Your earnings</th>
@@ -74,8 +87,10 @@
                         <td>{{ p.round_in_interaction}}</td>
                         <td>{{ p.action}}</td>
                         <td>{{ p.signal }}</td>
-                        <td>{{ p.message}}</td>
-                        <td>{{ p.other_message}}</td>
+                        {% if treatment == 'COM' %}
+                            <td>{{ p.message}}</td>
+                            <td>{{ p.other_message}}</td>
+                        {% endif %}
                         <td>{{ p.other_action}}</td>
                         <td>{{ p.other_signal}}</td>
                         <td>{{ p.payoff}}</td>
@@ -85,6 +100,7 @@
             {% endfor %}
         </table>
     {% endif %}
+
 
 
 {% endblock %}

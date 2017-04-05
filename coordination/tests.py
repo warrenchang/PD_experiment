@@ -9,4 +9,5 @@ class PlayerBot(Bot):
     def play_round(self):
         num_participants = len(self.subsession.get_players())
         yield (views.Decision, {"action": random.choice(['X','Y']), "guess": random.randint(0,num_participants-1)})
-        yield (views.Results)
+        if self.subsession.round_number == Constants.num_rounds:
+            yield (views.Results)
