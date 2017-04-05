@@ -6,7 +6,11 @@ import random
 
 
 class Introduction(Page):
+    timeout_seconds = 30
+
     def is_displayed(self):
+        if self.round_number == 1:
+            print('This is the start of PD')
         # return self.round_number == 1 and (not self.session.config['debug'])
         return self.round_number == 1
 
@@ -27,7 +31,7 @@ class DecisionWaitPage(WaitPage):
     def after_all_players_arrive(self):
         # it only gets executed once
         self.group.interact()
-        print('players have interacted!')
+        # print('players have interacted!')
 
 
 class Signal(Page):
@@ -45,7 +49,7 @@ class SignalWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         self.group.send_message()
-        print('message is sent!')
+        # print('message is sent!')
 
 
 class Results(Page):
@@ -86,11 +90,11 @@ class RematchingWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         self.subsession.group_randomly()  # randomly rematching
-        print('Group randomly rematched')
+        print((self.subsession.round_number,'Group randomly rematched'))
         if self.round_number == Constants.num_rounds:
             for p in self.subsession.get_players():
                 p.participant.vars['payoff_PD'] = sum([this_player.payoff for this_player in p.in_all_rounds()])
-                print((p,sum([this_player.payoff for this_player in p.in_all_rounds()])),p.participant.vars['payoff_PD'])
+                print(('my_PD_RematchingWaitPage',self.round_number,p,sum([this_player.payoff for this_player in p.in_all_rounds()])),p.participant.vars['payoff_PD'])
 
 page_sequence = [
     Introduction,

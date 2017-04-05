@@ -125,7 +125,8 @@ class Player(BasePlayer):
                 self.signal = 'b'
 
         # generate the signal for p2, depending on the two players' actions
-        if self.action == self.other_action:  # the same action, correlated signals
+        # if self.action == self.other_action:  # the same action, correlated signals
+        if self.action == self.other_action and self.action == 'A':  # both chose A, correlated signals
             if random.random()< Constants.gamma: # different signals
                 if self.signal == 'a':
                     self.other_signal = 'b'
@@ -134,7 +135,7 @@ class Player(BasePlayer):
             else: # the same signal
                 self.other_signal = self.signal
         else: # different actions, independent signals
-            if self.action == 'A':  # generate the signal for self
+            if self.action == 'A':  # generate the signal for the opponent
                 if random.random() < Constants.epsilon:  # wrong signal
                     self.other_signal = 'b'
                 else:

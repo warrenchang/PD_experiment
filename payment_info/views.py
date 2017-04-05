@@ -4,13 +4,15 @@ from otree.api import Currency as c, currency_range
 from .models import Constants
 import math
 
+
 class PaymentInfo(Page):
 
     def vars_for_template(self):
         participant = self.participant
+        print(self.participant.vars)
         return {
             'redemption_code': participant.label or participant.code,
-            'total_payoff': participant.payoff.to_real_world_currency(self.session),
+            'total_payoff': self.participant.payoff_plus_participation_fee(),
             'payoff_quiz': participant.vars['payoff_quiz'],
             'payoff_PD': participant.vars['payoff_PD'],
             'real_payoff_PD': participant.vars['payoff_PD'].to_real_world_currency(self.session),

@@ -7,6 +7,8 @@ import random
 
 class PlayerBot(Bot):
     def play_round(self):
+        if self.subsession.round_number == 1:
+            yield(views.Introduction)
         yield (views.Decision, {"action": random.choice(['A','B'])})
         yield (views.Signal, {"message": random.choice(['a','b'])})
         yield (views.Results)

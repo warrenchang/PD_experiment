@@ -8,6 +8,8 @@ from otreeutils.pages import AllGroupsWaitPage, ExtendedPage, UnderstandingQuest
 
 class StartPage(Page):
     def is_displayed(self):
+        if self.round_number == 1:
+            print('This is the start of PD quiz')
         return self.round_number == 1
 
 
@@ -50,12 +52,12 @@ class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
             'correct': 'True',
         },
         {
-            'question': "If you choose A, the probability for the other person to receive a signal 'a' is always higher than receiving a signal 'b'.",
+            'question': "If you choose A, the probability for the other person to receive a signal 'a' is higher than receiving a signal 'b'.",
             'options': ['True', 'False'],
             'correct': 'True',
         },
         {
-            'question': "When you and the other person make the same choice, the probability for you two to receive the same signal is",
+            'question': "When you and the other person both choose A, the probability for you two to receive the same signal is",
             'options': [0.95, 0.6, 0.55, 0.4],
             'correct': '0.95',
         },
@@ -65,7 +67,7 @@ class SomeUnderstandingQuestions(UnderstandingQuestionsPage):
             'correct': 'True',
         },
         {
-            'question': "When you and the other person have different choices, the signal you receive is independent from the signal the other person receives.",
+            'question': "When you and the other person make different choices, the signal you receive is independent from the signal the other person receives.",
             'options': ['True', 'False'],
             'correct': 'True',
         },

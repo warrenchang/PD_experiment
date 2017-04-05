@@ -10,6 +10,10 @@ class Investment(Page):
 
     def before_next_page(self):
         self.player.random_draw = random.randint(1,10)
+
+        if self.timeout_happened:
+            self.player.amount_invested = random.randint(0,21)
+
         if self.player.amount_invested == 21:
             self.player.success = self.player.random_draw >6
             self.player.payoff = 75*self.player.success

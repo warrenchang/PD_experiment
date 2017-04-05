@@ -74,7 +74,9 @@ LANGUAGE_CODE = 'en'
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree','otreeutils']
 
+
 # SENTRY_DSN = ''
+SENTRY_DSN = 'http://08e879c62c554e08b7b637e7172b5ba7:daa025e5010e414f98c785f2c04a74f9@sentry.otree.org/150'
 
 DEMO_PAGE_INTRO_TEXT = """
 <ul>
@@ -127,7 +129,6 @@ mturk_hit_settings = {
     ]
 }
 
-EXCHANGE_RATE = 1/150 # change the exchange rate here
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
@@ -135,8 +136,8 @@ EXCHANGE_RATE = 1/150 # change the exchange rate here
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.00,
-    'participation_fee': 0.00,
+    'real_world_currency_per_point': 1/120,
+    'participation_fee': 10.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -145,71 +146,57 @@ SESSION_CONFIGS = [
     {
         'name': 'PD_communication',
         'display_name': "Communication and Cooperation",
-        'num_demo_participants': 12,
-        'debug': DEBUG,
+        'num_demo_participants': 4,
         'app_sequence': ['my_PD_quiz','my_PD_practice','my_PD','coordination','my_PD_survey','ravens','investment_task','payment_info'],
-        'real_world_currency_per_point': EXCHANGE_RATE,
-        'participation_fee': 10,
     },
     {
         'name': 'PD_test',
         'display_name': "Repeated prisoner's dilemma_test",
-        'num_demo_participants': 4,
-        'app_sequence': ['my_PD_practice', 'my_PD', 'coordination', 'ravens',
-                         'investment_task' ],
-        'real_world_currency_per_point': EXCHANGE_RATE,
-        'participation_fee': 10,
+        'num_demo_participants': 12,
+        'debug': DEBUG,
+        'app_sequence': ['my_PD' ],
     },
     {
         'name': 'PD_practice',
         'display_name': "Practice interaction for repeated prisoner's dilemma",
         'num_demo_participants': 1,
         'app_sequence': ['my_PD_practice'],
-        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
-        'name': 'PD_multiple_interactions',
-        'display_name': "Prisoner's Dilemma with multiple interactions",
-        'num_demo_participants': 12,
-        'debug': DEBUG,
-        'app_sequence': ['my_PD'],
-        'participation_fee': 10,
-        'real_world_currency_per_point': EXCHANGE_RATE,
+        'name': 'PD_with_practice',
+        'display_name': "Prisoner's Dilemma with practice interaction",
+        'num_demo_participants': 4,
+        'app_sequence': ['my_PD_practice','my_PD'],
     },
     {
         'name': 'PD_quiz',
         'display_name': "Quiz questions for Prisoner's Dilemma",
         'num_demo_participants': 1,
         'app_sequence': ['my_PD_quiz', 'my_PD_survey'],
-        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'Raven',
         'display_name': "Raven's progressive matrix",
         'num_demo_participants': 1,
         'app_sequence': ['ravens'],
-        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'Investment',
         'display_name': "Investment Task for risk preferences",
         'num_demo_participants': 1,
         'app_sequence': ['investment_task'],
-        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'Coordination_game',
         'display_name': "Coordination: payoff dominant or risk dominant",
         'num_demo_participants': 4,
         'app_sequence': ['coordination'],
-        'real_world_currency_per_point': EXCHANGE_RATE,
     },
     {
         'name': 'my_survey',
         'display_name': "Survey questions for Prisoner's Dilemma",
         'num_demo_participants': 1,
         'app_sequence': ['my_PD_survey'],
-        'real_world_currency_per_point': EXCHANGE_RATE,
     },
 ]
 

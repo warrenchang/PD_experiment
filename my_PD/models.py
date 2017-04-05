@@ -37,12 +37,11 @@ class Constants(BaseConstants):
     #                       3, 2, 1, 4, 2, 6, 1, 2, 2, 3, 3, 4, 3, 4, 1, 1, 1]
     # num_interactions = 40
 
-    num_rounds = 76
     number_sequence = [ 2,  4,  3, 10,  4,  9,  3, 10,  7,  6,  4,  4,  3,  5,  1,  9,  6,
         3,  4, 10, 10,  2,  3,  8,  5,  7,  8,  3,  9,  7,  4,  7,  4,  7,
         5,  9,  6,  8, 10,  7,  5,  4,  1,  2,  6,  9,  2,  5,  1, 10,  3,
         2,  8, 10,  2,  2,  9,  5,  3,  7,  1,  7,  8,  3,  3,  4, 10,  6,
-       10,  6,  4,  4,  2,  5,  9, 10,  1]
+       10,  6,  4,  4,  2,  5,  9, 10]
     interactions = [1,  1,  1,  1,  2,  2,  3,  3,  4,  5,  5,  5,  5,  5,  5,  5,  6,
         6,  6,  6,  7,  8,  8,  8,  9,  9, 10, 11, 11, 12, 13, 13, 14, 14,
        15, 15, 16, 16, 17, 18, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 21,
@@ -53,8 +52,10 @@ class Constants(BaseConstants):
        1, 2, 3, 4, 1, 2, 3, 1, 1, 2, 3, 1, 2, 3, 1, 2, 1, 1, 2, 3, 4, 1, 2,
        1, 2, 3, 4, 5, 6, 1]
     interaction_length = [4, 2, 2, 1, 7, 4, 1, 3, 2, 1, 2, 1, 2, 2, 2, 2, 1, 1, 6, 4, 3, 1, 3,
-                          3, 2, 1, 4, 2, 6, 1, 2, 2, 3, 3, 4, 3, 4, 1, 1, 1]
-    num_interactions = 30
+       3, 2, 1, 4, 2, 6, 1]
+    num_rounds = 76
+    # num_rounds = 8 # change num_rounds for testing purpose, but need to make sure that number_sequence
+    num_interactions = interactions[num_rounds-1]
 
 
     # num_rounds = 3
@@ -140,7 +141,8 @@ class Group(BaseGroup):
                 p1.signal = 'b'
 
         # generate the signal for p2, depending on the two players' actions
-        if p1.action == p2.action:  # the same action, correlated signals
+        # if p1.action == p2.action:  # the same action, correlated signals
+        if p1.action == p1.other_action and p1.action == 'A':  # both chose A, correlated signals
             if random.random()< Constants.gamma: # different signals
                 if p1.signal == 'a':
                     p2.signal = 'b'
@@ -173,7 +175,7 @@ class Group(BaseGroup):
         p1, p2 = self.get_players()
         p1.other_message = p2.message
         p2.other_message = p1.message
-        print((p1.message,p2.message,p1.other_message,p2.other_message))
+        # print((p1.message,p2.message,p1.other_message,p2.other_message))
 
 
 class Player(BasePlayer):

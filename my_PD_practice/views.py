@@ -6,6 +6,8 @@ import random
 
 class StartPage(Page):
     def is_displayed(self):
+        if self.round_number == 1:
+            print('This is the start of PD practice')
         return self.round_number == 1
 
 
