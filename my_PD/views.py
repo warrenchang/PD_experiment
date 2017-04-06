@@ -45,7 +45,7 @@ class Decision(BasePage):
 
 
 class DecisionWaitPage(BaseWaitPage):
-    template_name = 'my_PD/DecisionWaitPage.html'
+    template_name = 'my_PD90/DecisionWaitPage.html'
 
     def after_all_players_arrive(self):
         # it only gets executed once
@@ -67,7 +67,7 @@ class Signal(BasePage):
 
 
 class SignalWaitPage(BaseWaitPage):
-    template_name = 'my_PD/SignalWaitPage.html'
+    template_name = 'my_PD90/SignalWaitPage.html'
 
     def is_displayed(self):
         return self.session.config['treatment'] == "COM"
@@ -106,8 +106,8 @@ class InteractionResults(BasePage):
 
 
 class RematchingWaitPage(WaitPage):
-    # template_name = 'my_PD/SignalWaitPage.html'
-    template_name = 'my_PD/RematchingWaitPage.html'
+    # template_name = 'my_PD90/SignalWaitPage.html'
+    template_name = 'my_PD90/RematchingWaitPage.html'
     wait_for_all_groups = True
 
     def is_displayed(self):

@@ -7,14 +7,17 @@
 
     <div style="text-align:center;font-size:16px">
         <p>
-                <strong>Please wait for other participants to finish, then you will be randomly re-matched to another participant
-                    to have your first interaction.
+            {% if player.round_number != Constants.num_rounds %}
+                <strong>Please wait for other participants to finish, then you will be randomly re-matched to another participant...
                 </strong>
+            {% else %}
+                <strong>This is the end of Part I. Please wait for other participants to finish, then Part II will start.
+                </strong>
+            {% endif %}
         </p>
     </div>
 
     <hr>
-
     <p style="text-align:center;font-size:16px">
         History for the current interaction
     </p>
@@ -36,7 +39,7 @@
         {% for p in player.in_all_rounds %}
             {% if p.interaction_number == player.interaction_number %}
                 <tr>
-                    <th style="text-align:center">'Practice'</th>
+                    <td>{{ p.interaction_number}}</td>
                     <td>{{ p.round_in_interaction}}</td>
                     <td>{{ p.action}}</td>
                     <td>{{ p.signal }}</td>
@@ -46,14 +49,15 @@
                     {% endif %}
                     <td>{{ p.other_action}}</td>
                     <td>{{ p.other_signal}}</td>
-                    <td>{{ p.payoff0}}</td>
+                    <td>{{ p.payoff}}</td>
                     <td>{{ p.cum_payoff}}</td>
                 </tr>
             {% endif %}
         {% endfor %}
     </table>
 
-    {% if player.interaction_number > 1 %}
+
+    {% if player.interaction_number != 1 %}
         <h5 style="text-align:center">
             History for previous interactions
         </h5>
@@ -85,7 +89,7 @@
                         {% endif %}
                         <td>{{ p.other_action}}</td>
                         <td>{{ p.other_signal}}</td>
-                        <td>{{ p.payoff0}}</td>
+                        <td>{{ p.payoff}}</td>
                         <td>{{ p.cum_payoff}}</td>
                     </tr>
                 {% endif %}

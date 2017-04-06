@@ -12,11 +12,11 @@ Practice rounds for infinitely repeated "Prisoner's Dilemma" with private monito
 
 
 class Constants(BaseConstants):
-    name_in_url = 'PD_practice'
+    name_in_url = 'PD_practice90'
     players_per_group = None
 
     num_rounds = 5
-    number_sequence = [ 5,  4,  2,  6,  9]
+    number_sequence = [ 5,  4,  2,  6,  10]
     interactions = [0,0,0,0,0,0]
     round_in_interactions = [1,2,3,4,5]
     interaction_length = [6]

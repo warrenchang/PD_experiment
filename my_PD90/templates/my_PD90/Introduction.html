@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+   The practice interaction is finished. You are being randomly matched to one participant to start an interaction.
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.instructions_template %}
+
+    <div style="text-align:right">
+    {% next_button %}
+    </div>
+
+{% endblock %}

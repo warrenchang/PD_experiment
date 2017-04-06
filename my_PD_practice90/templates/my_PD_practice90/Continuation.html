@@ -1,0 +1,103 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+{% endblock %}
+
+
+{% block content %}
+    <div style="text-align:center;font-size:16px">
+        <p>
+            The computer generated random number {{ number_generated }}, which is NOT more than 9.
+        </p>
+        <p>
+            The interaction will continue for another round.
+        </p>
+    </div>
+
+    <div style="text-align:right">
+        {% next_button %}
+    </div>
+
+    <hr>
+
+    {% if player.round_in_interaction != 1 %}
+        <p style="text-align:center;font-size:16px">
+            History for the current interaction
+        </p>
+        <table class="table" style="text-align:center">
+            <tr>
+                <th style="text-align:center">Interaction</th>
+                <th style="text-align:center">Round</th>
+                <th style="text-align:center">Your choice</th>
+                <th style="text-align:center">Your signal</th>
+                {% if treatment == 'COM' %}
+                    <th style="text-align:center">Message you sent</th>
+                    <th style="text-align:center">Message other sent</th>
+                {% endif %}
+                {% if treatment == 'PBL' %}
+                    <th style="text-align:center">Other's signal</th>
+                {% endif %}
+            </tr>
+            {% for p in player.in_previous_rounds %}
+                {% if p.interaction_number == player.interaction_number %}
+                    <tr>
+                        <th style="text-align:center">'Practice'</th>
+                        <td>{{ p.round_in_interaction }}</td>
+                        <td>{{ p.action}}</td>
+                        <td>{{ p.signal }}</td>
+                        {% if treatment == 'COM' %}
+                            <td>{{ p.message}}</td>
+                            <td>{{ p.other_message}}</td>
+                        {% endif %}
+                        {% if treatment == 'PBL' %}
+                            <td>{{ p.other_signal }}</td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if player.interaction_number > 1 %}
+        <h5 style="text-align:center">
+            History for previous interactions
+        </h5>
+        <table class="table" style="text-align:center">
+            <tr>
+                <th style="text-align:center">Interaction</th>
+                <th style="text-align:center">Round</th>
+                <th style="text-align:center">Your choice</th>
+                <th style="text-align:center">Your signal</th>
+                {% if treatment == 'COM' %}
+                    <th style="text-align:center">Message you sent</th>
+                    <th style="text-align:center">Message other sent</th>
+                {% endif %}
+                <th style="text-align:center">Other's choice</th>
+                <th style="text-align:center">Other's signal</th>
+                <th style="text-align:center">Your earnings</th>
+                <th style="text-align:center">Your total earnings</th>
+            </tr>
+            {% for p in player.in_previous_rounds %}
+                {% if p.interaction_number < player.interaction_number %}
+                    <tr>
+                        <td>{{ p.interaction_number}}</td>
+                        <td>{{ p.round_in_interaction}}</td>
+                        <td>{{ p.action}}</td>
+                        <td>{{ p.signal }}</td>
+                        {% if treatment == 'COM' %}
+                            <td>{{ p.message}}</td>
+                            <td>{{ p.other_message}}</td>
+                        {% endif %}
+                        <td>{{ p.other_action}}</td>
+                        <td>{{ p.other_signal}}</td>
+                        <td>{{ p.payoff0}}</td>
+                        <td>{{ p.cum_payoff}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+
+
+{% endblock %}

@@ -1,19 +1,33 @@
-{% extends 'otree/WaitPage.html' %}
+{% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
-{% block title %} {% endblock %}
+
+{% block title %}
+    Results
+{% endblock %}
+
 
 {% block content %}
-    {#    {{ body_text }}#}
 
     <div style="text-align:center;font-size:16px">
         <p>
-                <strong>Please wait for other participants to finish, then you will be randomly re-matched to another participant
-                    to have your first interaction.
-                </strong>
+            <strong>
+                The computer generated random number {{ number_generated }}, which is greater than 9. The interaction is ending now.
+            </strong>
+        </p>
+        <p>
+            <strong>
+                Now you have some time to review the information of the the current interaction.
+            </strong>
+        </p>
+        <p>
+            {% if player.round_number != Constants.num_rounds %}
+                You will be randomly and anonymously matched with another person to play.
+            {% endif %}
         </p>
     </div>
 
     <hr>
+
 
     <p style="text-align:center;font-size:16px">
         History for the current interaction
@@ -36,7 +50,7 @@
         {% for p in player.in_all_rounds %}
             {% if p.interaction_number == player.interaction_number %}
                 <tr>
-                    <th style="text-align:center">'Practice'</th>
+                    <td>{{ p.interaction_number}}</td>
                     <td>{{ p.round_in_interaction}}</td>
                     <td>{{ p.action}}</td>
                     <td>{{ p.signal }}</td>
@@ -46,14 +60,18 @@
                     {% endif %}
                     <td>{{ p.other_action}}</td>
                     <td>{{ p.other_signal}}</td>
-                    <td>{{ p.payoff0}}</td>
+                    <td>{{ p.payoff}}</td>
                     <td>{{ p.cum_payoff}}</td>
                 </tr>
             {% endif %}
         {% endfor %}
     </table>
 
-    {% if player.interaction_number > 1 %}
+    <div style="text-align:right">
+        {% next_button %}
+    </div>
+
+    {% if player.interaction_number != 1 %}
         <h5 style="text-align:center">
             History for previous interactions
         </h5>
@@ -85,14 +103,12 @@
                         {% endif %}
                         <td>{{ p.other_action}}</td>
                         <td>{{ p.other_signal}}</td>
-                        <td>{{ p.payoff0}}</td>
+                        <td>{{ p.payoff}}</td>
                         <td>{{ p.cum_payoff}}</td>
                     </tr>
                 {% endif %}
             {% endfor %}
         </table>
     {% endif %}
-
-
 
 {% endblock %}

@@ -1,0 +1,102 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Practice interaction: send your message
+{% endblock %}
+
+{% block content %}
+
+    <p style="font-size:16px">Round {{ player.round_in_interaction }} of Practice Interaction</p>
+
+    {% include Constants.instructions_template %}
+
+    <div style="text-align:center;font-size:16px">
+        <p>Both players have made decisions for this round.</p>
+
+        {#    <table class="table-condensed" style="width:500px; margin-top:20px;text-align:center">">#}
+        <table class="table-condensed" style="margin: auto;width:500px; margin-top:20px;text-align:center;font-size:16px">
+            <tr><td>Your choice:</td><td>{{ player.action}}</td></tr>
+            <tr><td>The signal you received about the other's choice:</td><td>{{ player.signal}} </td></tr>
+            <tr><td colspan="2"><hr/></td></tr>
+        </table>
+    </div>
+
+
+    <div class="form-group required" style="text-align:center">
+        {% formfield player.message with label='Please send a message to the other person about the signal you received:' %}
+        <div style="text-align:right">
+            {% next_button %}
+        </div>
+    </div>
+
+
+
+    {% if player.round_in_interaction != 1 %}
+        <p style="text-align:center;font-size:16px">
+            History for the current interaction
+        </p>
+        <table class="table" style="text-align:center">
+            <tr>
+                <th style="text-align:center">Interaction</th>
+                <th style="text-align:center">Round</th>
+                <th style="text-align:center">Your choice</th>
+                <th style="text-align:center">Your signal</th>
+                <th style="text-align:center">Message you sent</th>
+                <th style="text-align:center">Message other sent</th>
+            </tr>
+            {% for p in player.in_previous_rounds %}
+                {% if p.interaction_number == player.interaction_number %}
+                    <tr>
+                        <th style="text-align:center">'Practice'</th>
+                        <td>{{ p.round_in_interaction }}</td>
+                        <td>{{ p.action}}</td>
+                        <td>{{ p.signal }}</td>
+                        <td>{{ p.message}}</td>
+                        <td>{{ p.other_message}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if player.interaction_number > 1 %}
+        <h5 style="text-align:center">
+            History for previous interactions
+        </h5>
+        <table class="table" style="text-align:center">
+            <tr>
+                <th style="text-align:center">Interaction</th>
+                <th style="text-align:center">Round</th>
+                <th style="text-align:center">Your choice</th>
+                <th style="text-align:center">Your signal</th>
+                <th style="text-align:center">Message you sent</th>
+                <th style="text-align:center">Message other sent</th>
+                <th style="text-align:center">Other's choice</th>
+                <th style="text-align:center">Other's signal</th>
+                <th style="text-align:center">Your earnings</th>
+                <th style="text-align:center">Your total earnings</th>
+            </tr>
+            {% for p in player.in_previous_rounds %}
+                {% if p.interaction_number < player.interaction_number %}
+                    <tr>
+                        <td>{{ p.interaction_number}}</td>
+                        <td>{{ p.round_in_interaction}}</td>
+                        <td>{{ p.action}}</td>
+                        <td>{{ p.signal }}</td>
+                        <td>{{ p.message}}</td>
+                        <td>{{ p.other_message}}</td>
+                        <td>{{ p.other_action}}</td>
+                        <td>{{ p.other_signal}}</td>
+                        <td>{{ p.payoff0}}</td>
+                        <td>{{ p.cum_payoff}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+
+
+    {#    {% include Constants.instructions_template %}#}
+
+{% endblock %}

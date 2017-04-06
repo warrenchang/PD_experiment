@@ -1,0 +1,55 @@
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+{#    <h3 class="panel-sub-heading">#}
+{#        Instructions#}
+{#    </h3>#}
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'global/matrix.css' %}"/>
+
+    <table class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>Other participant</th>
+        </tr>
+        <tr>
+            <th style="text-align:center">A</th>
+            <th style="text-align:center">B</th>
+        </tr>
+        <tr>
+            <th rowspan=2><span class="rotate90">You</span></th>
+            <th align ="center">A</th>
+            <td>{{ Constants.R}}, {{ Constants.R}}</td>
+            <td>{{ Constants.S}}, {{ Constants.T}}</td>
+        </tr>
+        <tr>
+            <th align = "center">B</th>
+            <td>{{ Constants.T}}, {{ Constants.S}}</td>
+            <td>{{ Constants.P}}, {{ Constants.P}}</td>
+        </tr>
+    </table>
+
+
+    <hr>
+
+    <p>
+        You will not learn directly the other person’s choice. You will instead receive a signal to help you assess what the other person has chosen.
+    </p>
+
+    <p>
+      If the other person chooses A, then your signal is:
+        <i> a with 55% probability and b with 45% probability. </i>
+    </p>
+
+    <p>
+      If the other person chooses B, then your signal is:
+        <i> b with 55% probability and a with 45% probability. </i>
+    </p>
+
+    <p><strong>When you and the other person make the same choice, you will receive the same signal with probability 95%.</strong></p>
+    <p> Otherwise, your signals are independent. </p>
+
+</div>

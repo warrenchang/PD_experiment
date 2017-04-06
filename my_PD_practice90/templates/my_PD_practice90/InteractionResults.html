@@ -1,19 +1,33 @@
-{% extends 'otree/WaitPage.html' %}
+{% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
-{% block title %} {% endblock %}
+
+{% block title %}
+    Practice interaction: results
+{% endblock %}
+
 
 {% block content %}
-    {#    {{ body_text }}#}
 
     <div style="text-align:center;font-size:16px">
         <p>
-                <strong>Please wait for other participants to finish, then you will be randomly re-matched to another participant
-                    to have your first interaction.
-                </strong>
+            <strong>
+                The computer generated random number {{ number_generated }}, which is greater than 9. The interaction is ending now.
+            </strong>
+        </p>
+        <p>
+            <strong>
+                Now you have some time to review the information of the the current interaction.
+            </strong>
+        </p>
+        <p>
+            {% if player.round_number != Constants.num_rounds %}
+                You will be randomly and anonymously matched with another person to play.
+            {% endif %}
         </p>
     </div>
 
     <hr>
+
 
     <p style="text-align:center;font-size:16px">
         History for the current interaction
@@ -52,6 +66,10 @@
             {% endif %}
         {% endfor %}
     </table>
+
+    <div style="text-align:right">
+        {% next_button %}
+    </div>
 
     {% if player.interaction_number > 1 %}
         <h5 style="text-align:center">
@@ -92,7 +110,5 @@
             {% endfor %}
         </table>
     {% endif %}
-
-
 
 {% endblock %}
