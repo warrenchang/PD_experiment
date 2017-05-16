@@ -15,6 +15,7 @@ class StartPage(Page):
 
 
 class Decision(Page):
+    timeout_seconds = 70
     form_model = models.Player
     form_fields = ['action','guess']
 

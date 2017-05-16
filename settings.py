@@ -143,6 +143,19 @@ SESSION_CONFIG_DEFAULTS = {
 }
 
 SESSION_CONFIGS = [
+
+    {
+        'name': 'bigfive_gto',
+        'display_name': 'Timeout for several pages',
+        'num_demo_participants': 1,
+        'app_sequence': ['bigfive_gto'],
+    },
+    {
+        'name': 'bigfive',
+        'display_name': 'Dynamic timeout',
+        'num_demo_participants': 1,
+        'app_sequence': ['bigfive'],
+    },
     {
         'name': 'PD_communication',
         'display_name': "PD Private Monitoring with Communication",
@@ -263,8 +276,9 @@ SESSION_CONFIGS = [
     {
         'name': 'Coordination_game',
         'display_name': "Coordination: payoff dominant or risk dominant",
-        'num_demo_participants': 4,
+        'num_demo_participants': 2,
         'app_sequence': ['coordination'],
+        'debug': DEBUG,
     },
     {
         'name': 'my_survey',
